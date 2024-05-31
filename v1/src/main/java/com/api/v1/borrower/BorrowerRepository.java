@@ -5,11 +5,10 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import com.api.v1.customized_annotations.SSN;
 
 public interface BorrowerRepository extends JpaRepository<Borrower, UUID> {
 	
-	Optional<Borrower> findBySsn(@NotNull @Size(min = 9, max = 9) String ssn);
+	Optional<Borrower> findBySsn(@SSN String ssn);
 
 }
