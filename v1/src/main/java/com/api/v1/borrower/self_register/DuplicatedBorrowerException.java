@@ -8,6 +8,4 @@ public class DuplicatedBorrowerException extends RuntimeException {
 		super("Borrower whose ssn is %s already exist.".formatted(ssn));
 	}
 	
-	
-
 }
