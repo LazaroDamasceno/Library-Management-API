@@ -8,9 +8,13 @@ import com.api.v1.borrower.self_register.SelfRegisterBorrowerDTO;
 import com.api.v1.borrower.update.UpdateBorrowerDataDTO;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "v1_borrower")
+@Getter
+@NoArgsConstructor
 public class Borrower implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -39,13 +43,8 @@ public class Borrower implements Serializable {
 
     @Column(nullable = false)
     private String phoneNumber;
-    
-	public Borrower() {
-		super();
-	}
 	
 	private Borrower(SelfRegisterBorrowerDTO dto) {
-		super();
 		this.name = dto.name();
 		this.ssn = dto.ssn();
 		this.birthDate = dto.birthDate();
@@ -70,38 +69,6 @@ public class Borrower implements Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
-	}
-
-	public UUID getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public String getSsn() {
-		return ssn;
-	}
-
-	public LocalDate getBirthDate() {
-		return birthDate;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
 	}
     
 }
