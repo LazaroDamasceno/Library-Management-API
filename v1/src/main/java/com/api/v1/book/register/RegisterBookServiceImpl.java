@@ -1,12 +1,11 @@
 package com.api.v1.book.register;
 
-import java.util.DuplicateFormatFlagsException;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.api.v1.book.Book;
 import com.api.v1.book.BookRepository;
+import com.api.v1.book.DuplicatedBookException;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -27,7 +26,7 @@ public class RegisterBookServiceImpl implements RegisterBookService {
 
     private void isBookAlreadyRegistered(String isbn) {
         if (repository.findByIsbn(isbn).isPresent()) {
-            throw new DuplicateFormatFlagsException(isbn);
+            throw new DuplicatedBookException(isbn);
         }
     }
     
