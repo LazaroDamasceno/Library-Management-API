@@ -65,7 +65,7 @@ public class Book implements Serializable {
         return new Book(dto);
     }
 
-    public Book() {
+    protected Book() {
     }
 
     public static long getSerialversionuid() {

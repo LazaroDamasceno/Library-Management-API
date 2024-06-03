@@ -67,7 +67,7 @@ public class Borrower implements Serializable {
 		return serialVersionUID;
 	}
 
-	public Borrower() {
+	protected Borrower() {
 	}
 
 	public UUID getId() {
