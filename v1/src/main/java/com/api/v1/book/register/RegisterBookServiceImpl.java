@@ -19,7 +19,7 @@ public class RegisterBookServiceImpl implements RegisterBookService {
     @Override
     @Transactional
     public void register(@NotNull RegisterBookDTO dto) {
-        isBookAlreadyRegistered(dto.ISBN());
+        isBookAlreadyRegistered(dto.isbn());
         Book book = Book.createInstance(dto);
         repository.save(book);
     }

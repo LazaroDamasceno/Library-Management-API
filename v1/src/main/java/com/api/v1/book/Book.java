@@ -21,7 +21,7 @@ public class Book implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID ID;
+    private UUID id;
 
     @Column(nullable = false)
     private String title = "";
@@ -39,7 +39,7 @@ public class Book implements Serializable {
     private int numberOfPages = 0;
 
     @Column(nullable = false, unique = true)
-    private String ISBN = "";
+    private String isbn = "";
 
     @Column(nullable = false)
     private int vesion = 1;
@@ -54,7 +54,7 @@ public class Book implements Serializable {
         this.fields.add(dto.fieldsDTO().secondaryField());
         this.fields.add(dto.fieldsDTO().ternaryField());
         this.numberOfPages = dto.numberOfPages();
-        this.ISBN = dto.ISBN();
+        this.isbn = dto.isbn();
         this.vesion = dto.vesion();
     }
 
