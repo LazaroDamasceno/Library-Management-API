@@ -8,13 +8,9 @@ import java.util.UUID;
 import com.api.v1.book.register.RegisterBookDTO;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "v1_book")
-@Getter
-@NoArgsConstructor
 public class Book implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,5 +57,44 @@ public class Book implements Serializable {
     public static Book createInstance(RegisterBookDTO dto) {
         return new Book(dto);
     }
-    
+
+    public Book() {
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public List<String> getAuthors() {
+        return authors;
+    }
+
+    public List<String> getFields() {
+        return fields;
+    }
+
+    public int getNumberOfPages() {
+        return numberOfPages;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public int getVesion() {
+        return vesion;
+    }
+
 }

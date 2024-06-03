@@ -1,5 +1,6 @@
 package com.api.v1.borrower.self_register;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -7,13 +8,12 @@ import com.api.v1.borrower.Borrower;
 import com.api.v1.borrower.BorrowerRepository;
 
 import jakarta.validation.constraints.NotNull;
-import lombok.RequiredArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
 public class SelfRegisterBorrowerServiceImpl implements SelfRegisterBorrowerService {
 	
-	private final BorrowerRepository repository;
+	@Autowired
+	private BorrowerRepository repository;
 
 	@Override
 	@Transactional

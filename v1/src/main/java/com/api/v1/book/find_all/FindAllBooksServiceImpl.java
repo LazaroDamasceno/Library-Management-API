@@ -2,19 +2,18 @@ package com.api.v1.book.find_all;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.api.v1.book.Book;
 import com.api.v1.book.BookRepository;
 
-import lombok.RequiredArgsConstructor;
-
 @Service
-@RequiredArgsConstructor
 public class FindAllBooksServiceImpl implements FindAllBooksService {
 
-    private final BookRepository repository;
+    @Autowired
+    private BookRepository repository;
 
     @Override
     @Transactional(readOnly = true)
