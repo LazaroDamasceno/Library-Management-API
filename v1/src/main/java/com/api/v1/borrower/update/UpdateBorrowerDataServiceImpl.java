@@ -1,6 +1,5 @@
 package com.api.v1.borrower.update;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,15 +9,14 @@ import com.api.v1.borrower.find_by_ssn.FindBorrowerBySSnService;
 import com.api.v1.customized_annotations.SSN;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class UpdateBorrowerDataServiceImpl implements UpdateBorrowerDataService {
 	
-	@Autowired
-	private BorrowerRepository repository;
-	
-	@Autowired
-	private FindBorrowerBySSnService findBorrowerBySSn;
+	private final BorrowerRepository repository;
+	private final FindBorrowerBySSnService findBorrowerBySSn;
 
 	@Override
 	@Transactional

@@ -1,6 +1,5 @@
 package com.api.v1.borrower.self_register;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,13 +7,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("api/v1/borrowers")
+@RequiredArgsConstructor
 public class SelfRegisterBorrowerController {
 	
-	@Autowired
-	private SelfRegisterBorrowerService service;
+	private final SelfRegisterBorrowerService service;
 	
 	@PostMapping
 	public ResponseEntity<Void> selfRegister(@NotNull @RequestBody SelfRegisterBorrowerDTO dto) {

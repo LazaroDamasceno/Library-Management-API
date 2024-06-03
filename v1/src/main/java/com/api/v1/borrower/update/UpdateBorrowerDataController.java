@@ -1,6 +1,5 @@
 package com.api.v1.borrower.update;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -10,13 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("api/v1/borrowers")
+@RequiredArgsConstructor
 public class UpdateBorrowerDataController {
 
-	@Autowired
-	private UpdateBorrowerDataService service;
+	private final UpdateBorrowerDataService service;
 	
 	@PutMapping("{ssn}")
 	public ResponseEntity<Void> updateData(
