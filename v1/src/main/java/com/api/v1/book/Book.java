@@ -38,10 +38,10 @@ public class Book implements Serializable {
     private String isbn = "";
 
     @Column(nullable = false)
-    private int vesion = 1;
+    private int version = 1;
 
     @Column(nullable = false)
-    private int numberOfCopies = 0;
+    private int numberOfCopies = 1;
 
     @Column(nullable = false)
     private int numberOfBorrowedCopies = 0;
@@ -57,7 +57,8 @@ public class Book implements Serializable {
         this.fields.add(dto.fieldsDTO().ternaryField());
         this.numberOfPages = dto.numberOfPages();
         this.isbn = dto.isbn();
-        this.vesion = dto.vesion();
+        this.version = dto.vesion();
+        this.numberOfCopies = dto.numberOfCopies();
     }
 
     public static Book createInstance(RegisterBookDTO dto) {
@@ -99,8 +100,8 @@ public class Book implements Serializable {
         return isbn;
     }
 
-    public int getVesion() {
-        return vesion;
+    public int getVersion() {
+        return version;
     }
 
     public int getNumberOfCopies() {
