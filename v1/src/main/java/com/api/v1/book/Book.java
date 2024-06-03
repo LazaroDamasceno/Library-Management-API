@@ -40,6 +40,12 @@ public class Book implements Serializable {
     @Column(nullable = false)
     private int vesion = 1;
 
+    @Column(nullable = false)
+    private int numberOfCopies = 0;
+
+    @Column(nullable = false)
+    private int numberOfBorrowedCopies = 0;
+
     private Book(RegisterBookDTO dto) {
         this.title = dto.title();
         this.subtitle = dto.subtitle();
@@ -97,4 +103,12 @@ public class Book implements Serializable {
         return vesion;
     }
 
+    public int getNumberOfCopies() {
+        return numberOfCopies;
+    }
+
+    public int getNumberOfBorrowedCopies() {
+        return numberOfBorrowedCopies;
+    }
+    
 }
