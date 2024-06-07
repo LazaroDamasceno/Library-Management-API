@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.api.v1.book.Book;
 import com.api.v1.book.BookRepository;
-import com.api.v1.book.DuplicatedBookException;
 
 import jakarta.validation.constraints.NotNull;
 

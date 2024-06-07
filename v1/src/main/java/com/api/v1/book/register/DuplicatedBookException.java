@@ -1,4 +1,4 @@
-package com.api.v1.book;
+package com.api.v1.book.register;
 
 public class DuplicatedBookException extends RuntimeException {
     
