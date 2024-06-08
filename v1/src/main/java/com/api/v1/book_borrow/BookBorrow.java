@@ -1,4 +1,4 @@
-package com.api.v1.borrow;
+package com.api.v1.book_borrow;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
@@ -11,7 +11,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "v1_borrow")
-public class Borrow implements Serializable {
+public class BookBorrow implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -37,16 +37,16 @@ public class Borrow implements Serializable {
     @ManyToOne(cascade = CascadeType.ALL)
     private Borrower borrower;
 
-    protected Borrow() {
+    protected BookBorrow() {
     }
 
-    private Borrow(Book book, Borrower borrower) {
+    private BookBorrow(Book book, Borrower borrower) {
         this.book = book;
         this.borrower = borrower;
     }
 
-    public static Borrow createInstance(Book book, Borrower borrower) {
-        return new Borrow(book, borrower);
+    public static BookBorrow createInstance(Book book, Borrower borrower) {
+        return new BookBorrow(book, borrower);
     }
 
     public void renewBorrow() {
