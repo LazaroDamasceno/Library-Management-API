@@ -23,11 +23,11 @@ public class BookBorrow implements Serializable {
     private final ZonedDateTime borrowingDateTime = ZonedDateTime.now();
 
     @Column(nullable = false)
-    private final ZonedDateTime excepetedReturningDateTime = ZonedDateTime.now();
+    private final ZonedDateTime dueDateTime = ZonedDateTime.now();
 
-    private ZonedDateTime extendedReturningDateTime;
+    private ZonedDateTime extendedDueDateTime;
 
-    private ZonedDateTime returnedDateTime;
+    private ZonedDateTime actualReturnDateTime;
 
     @Column(nullable = false)
     @ManyToOne(cascade = CascadeType.ALL)
@@ -50,11 +50,11 @@ public class BookBorrow implements Serializable {
     }
 
     public void renewBorrow() {
-        this.extendedReturningDateTime = excepetedReturningDateTime.plusWeeks(2);
+        this.extendedDueDateTime = dueDateTime.plusWeeks(2);
     }
 
-    public void returnBook () {
-        this.returnedDateTime = ZonedDateTime.now();
+    public void markAsReturned () {
+        this.actualReturnDateTime = ZonedDateTime.now();
     }
 
     public static long getSerialversionuid() {
@@ -69,16 +69,16 @@ public class BookBorrow implements Serializable {
         return borrowingDateTime;
     }
 
-    public ZonedDateTime getExcepetedReturningDateTime() {
-        return excepetedReturningDateTime;
+    public ZonedDateTime getDueDateTime() {
+        return dueDateTime;
     }
 
-    public ZonedDateTime getExtendedReturningDateTime() {
-        return extendedReturningDateTime;
+    public ZonedDateTime getExtendedDueDateTime() {
+        return extendedDueDateTime;
     }
 
-    public ZonedDateTime getReturnedDateTime() {
-        return returnedDateTime;
+    public ZonedDateTime getActualReturnDateTime() {
+        return actualReturnDateTime;
     }
 
     public Book getBook() {
