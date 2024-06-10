@@ -19,7 +19,7 @@ public class FindActiveBookBorrowsByBorrowerController {
     @Autowired
     private FindActiveBookBorrowsByBorrowerService service;
 
-    @GetMapping("all/active/by-ssn/{ssn}")
+    @GetMapping("active/by-ssn/{ssn}")
     public ResponseEntity<List<BookBorrow>> findActiveBookBorrows(@SSN @PathVariable String ssn) {
         return ResponseEntity.ok(service.findActiveBookBorrows(ssn));
     }

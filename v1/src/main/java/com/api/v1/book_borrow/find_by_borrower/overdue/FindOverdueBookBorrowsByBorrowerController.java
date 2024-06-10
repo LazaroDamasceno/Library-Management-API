@@ -19,7 +19,7 @@ public class FindOverdueBookBorrowsByBorrowerController {
     @Autowired
     private FindOverdueBookBorrowsByBorrowerService service;
 
-    @GetMapping("all/overdue/by-ssn/{ssn}")
+    @GetMapping("overdue/by-ssn/{ssn}")
     public ResponseEntity<List<BookBorrow>> findOverdueBookBorrows(@SSN @PathVariable String ssn) {
         return ResponseEntity.ok(service.findOverdueBookBorrows(ssn));
     }

@@ -22,7 +22,7 @@ public class FindBookBorrowsByBorrowersBetweenDateTimesController {
     @Autowired
     private FindBookBorrowsByBorrowersBetweenDateTimesService service;
 
-    @GetMapping("all/by-ssn/{ssn}/between-datetimes")
+    @GetMapping("between-datetimes/by-ssn/{ssn}")
     public ResponseEntity<List<BookBorrow>> findBetweenDateTimes(
         @SSN @PathVariable String ssn, 
         @NotNull @RequestBody BetweenDateTimesDTO dto
