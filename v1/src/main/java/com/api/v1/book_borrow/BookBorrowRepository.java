@@ -42,4 +42,20 @@ public interface BookBorrowRepository extends JpaRepository<BookBorrow, UUID> {
         @Param("lastDateTime") LocalDateTime lastDateTime
     );
 
+    @Query("""
+        SELECT bb
+        FROM BookBorrow bb
+        WHERE bb.borrower = :borrower
+        AND (
+            bb.actualReturnDateTime IS NULL
+            OR bb.dueDateTime <= CURRENT_TIMESTAMP
+            OR (
+                bb.extendedDueDateTime IS NOT NULL
+                AND bb.extendedDueDateTime <= CURRENT_TIMESTAMP
+            )
+        )
+    """)
+    List<BookBorrow> findActiveBookBorrowsByBorrowers(@Param("borrower") Borrower borrower);
+    
+
 }

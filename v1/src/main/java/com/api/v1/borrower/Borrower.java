@@ -12,8 +12,6 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "v1_borrower")
 public class Borrower implements Serializable {
-    
-    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -61,10 +59,6 @@ public class Borrower implements Serializable {
 		this.address = dto.address();
 		this.gender = dto.gender();
 		this.phoneNumber = dto.phoneNumber();
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 	protected Borrower() {

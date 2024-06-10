@@ -13,8 +13,6 @@ import jakarta.persistence.*;
 @Table(name = "v1_book_borrow")
 public class BookBorrow implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -23,7 +21,7 @@ public class BookBorrow implements Serializable {
     private final LocalDateTime borrowDateTime = LocalDateTime.now();
 
     @Column(nullable = false)
-    private final LocalDateTime dueDateTime = LocalDateTime.now();
+    private final LocalDateTime dueDateTime = LocalDateTime.now().plusWeeks(2);
 
     private LocalDateTime extendedDueDateTime;
 
@@ -55,10 +53,6 @@ public class BookBorrow implements Serializable {
 
     public void markAsReturned () {
         this.actualReturnDateTime = LocalDateTime.now();
-    }
-
-    public static long getSerialversionuid() {
-        return serialVersionUID;
     }
 
     public UUID getId() {

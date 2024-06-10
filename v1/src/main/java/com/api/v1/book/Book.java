@@ -13,8 +13,6 @@ import jakarta.persistence.*;
 @Table(name = "v1_book")
 public class Book implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -65,10 +63,6 @@ public class Book implements Serializable {
     }
 
     protected Book() {
-    }
-
-    public static long getSerialversionuid() {
-        return serialVersionUID;
     }
 
     public UUID getId() {
