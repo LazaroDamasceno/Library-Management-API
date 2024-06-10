@@ -1,7 +1,5 @@
 package com.api.v1.book.register;
 
-import java.util.UUID;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,15 +20,8 @@ public class RegisterBookServiceImpl implements RegisterBookService {
     @Override
     @Transactional
     public void register(@NotNull RegisterBookDTO dto) {
-        isBookAlreadyRegistered(dto.isbn());
         Book book = Book.createInstance(dto);
         repository.save(book);
-    }
-
-    private void isBookAlreadyRegistered(String isbn) {
-        if (repository.findByIsbn(UUID.fromString(isbn)).isPresent()) {
-            throw new DuplicatedBookException(isbn);
-        }
     }
     
 }
