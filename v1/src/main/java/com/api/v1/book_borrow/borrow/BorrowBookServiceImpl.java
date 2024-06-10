@@ -8,7 +8,7 @@ import com.api.v1.book.find_by_isbn.FindBookByIsbnService;
 import com.api.v1.book_borrow.BookBorrow;
 import com.api.v1.book_borrow.BookBorrowRepository;
 import com.api.v1.borrower.Borrower;
-import com.api.v1.borrower.find_by_ssn.FindBorrowerBySSnService;
+import com.api.v1.borrower.find_by_ssn.FindBorrowerBySsnService;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -19,7 +19,7 @@ public class BorrowBookServiceImpl implements BorrowBookService {
     private BookBorrowRepository repository;
 
     @Autowired
-    private FindBorrowerBySSnService findBorrowerBySSn;
+    private FindBorrowerBySsnService findBorrowerBySSn;
 
     @Autowired 
     FindBookByIsbnService findBookByISBN;
@@ -34,9 +34,17 @@ public class BorrowBookServiceImpl implements BorrowBookService {
     }
 
     private void doesBorrowerHaveThreeActiveBookBorrows(String ssn) {
-        if (repository.countHowManyBorrowsByBorrower(ssn) == 3) {
+        if (countHowManyBorrowsByBorrower(ssn) == 3) {
             throw new BookBorrowLimitReachedException(ssn);
         }
+    }
+
+    private long countHowManyBorrowsByBorrower(String ssn) {
+        return repository
+            .findAll()
+            .stream()
+            .filter(e -> e.getBorrower().getSsn() == ssn)
+            .count();
     }
 
 }

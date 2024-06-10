@@ -1,5 +1,6 @@
 package com.api.v1.book_borrow;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -8,27 +9,37 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.api.v1.book.Book;
+import com.api.v1.borrower.Borrower;
+
 public interface BookBorrowRepository extends JpaRepository<BookBorrow, UUID> {
 
     @Query("""
-        select count(b) 
-        from BookBorrow b 
-        where b.borrower.ssn = :ssn
+        SELECT bb
+        FROM BookBorrow bb
+        WHERE bb.book = :book
+        AND bb.borrower = :borrower
     """)
-    long countHowManyBorrowsByBorrower(@Param("ssn") String ssn);  
+    Optional<BookBorrow> findBookBorrowByBookAndBorrower(@Param("book") Book book, @Param("borrower") Borrower borrower);
 
     @Query("""
-        select b 
-        from Borrow b
-        where b.book.isbn = :isbn
-        and b.borrower.ssn = :ssn 
+        SELECT bb 
+        FROM BookBorrow bb
+        WHERE bb.borrower = :borrower
     """)
-    Optional<BookBorrow> findBookBorrowByBookAndBorrower(@Param("isbn") UUID isbn, @Param("ssn") String ssn);
+    List<BookBorrow> findAllBookBorrowsByBorrowers(@Param("borrower") Borrower borrower);
 
     @Query("""
-        select b 
-        from Borrow
-        where b.borrower.ssn = :ssn       
+        SELECT bb
+        FROM BookBorrow bb
+        WHERE bb.borrower = :borrower
+        AND bb.borrowDateTime >= firstDateTime
+        AND bb.borrowDateTime <= lastDateTime
     """)
-    List<BookBorrow> findAllBorrowsByBorrowers(@Param("ssn") String ssn);
+    List<BookBorrow> findBookBorrowsByBorrowersBetweenDateTimes(
+        @Param("borrower") Borrower borrower,
+        @Param("firstDateTime") LocalDateTime firstDateTime,
+        @Param("lastDateTime") LocalDateTime lastDateTime
+    );
+
 }

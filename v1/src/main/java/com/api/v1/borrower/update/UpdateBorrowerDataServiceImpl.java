@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.api.v1.borrower.Borrower;
 import com.api.v1.borrower.BorrowerRepository;
-import com.api.v1.borrower.find_by_ssn.FindBorrowerBySSnService;
+import com.api.v1.borrower.find_by_ssn.FindBorrowerBySsnService;
 import com.api.v1.customized_annotations.SSN;
 
 import jakarta.validation.constraints.NotNull;
@@ -18,7 +18,7 @@ public class UpdateBorrowerDataServiceImpl implements UpdateBorrowerDataService 
 	private BorrowerRepository repository;
 
 	@Autowired
-	private FindBorrowerBySSnService findBorrowerBySSn;
+	private FindBorrowerBySsnService findBorrowerBySSn;
 
 	@Override
 	@Transactional

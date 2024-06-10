@@ -1,7 +1,7 @@
 package com.api.v1.book_borrow;
 
 import java.io.Serializable;
-import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import com.api.v1.book.Book;
@@ -10,7 +10,7 @@ import com.api.v1.borrower.Borrower;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "v1_borrow")
+@Table(name = "v1_book_borrow")
 public class BookBorrow implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -20,14 +20,14 @@ public class BookBorrow implements Serializable {
     private UUID id;
 
     @Column(nullable = false)
-    private final ZonedDateTime borrowingDateTime = ZonedDateTime.now();
+    private final LocalDateTime borrowDateTime = LocalDateTime.now();
 
     @Column(nullable = false)
-    private final ZonedDateTime dueDateTime = ZonedDateTime.now();
+    private final LocalDateTime dueDateTime = LocalDateTime.now();
 
-    private ZonedDateTime extendedDueDateTime;
+    private LocalDateTime extendedDueDateTime;
 
-    private ZonedDateTime actualReturnDateTime;
+    private LocalDateTime actualReturnDateTime;
 
     @Column(nullable = false)
     @ManyToOne(cascade = CascadeType.ALL)
@@ -54,7 +54,7 @@ public class BookBorrow implements Serializable {
     }
 
     public void markAsReturned () {
-        this.actualReturnDateTime = ZonedDateTime.now();
+        this.actualReturnDateTime = LocalDateTime.now();
     }
 
     public static long getSerialversionuid() {
@@ -65,19 +65,19 @@ public class BookBorrow implements Serializable {
         return id;
     }
 
-    public ZonedDateTime getBorrowingDateTime() {
-        return borrowingDateTime;
+    public LocalDateTime getBorrowDateTime() {
+        return borrowDateTime;
     }
 
-    public ZonedDateTime getDueDateTime() {
+    public LocalDateTime getDueDateTime() {
         return dueDateTime;
     }
 
-    public ZonedDateTime getExtendedDueDateTime() {
+    public LocalDateTime getExtendedDueDateTime() {
         return extendedDueDateTime;
     }
 
-    public ZonedDateTime getActualReturnDateTime() {
+    public LocalDateTime getActualReturnDateTime() {
         return actualReturnDateTime;
     }
 
