@@ -1,9 +1,8 @@
-package com.api.v1.book_borrow.find_by_borrower.active;
+package com.api.v1.book_borrow.find_by_borrower.overdue;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.api.v1.book_borrow.BookBorrow;
 import com.api.v1.book_borrow.BookBorrowRepository;
@@ -11,8 +10,7 @@ import com.api.v1.borrower.Borrower;
 import com.api.v1.borrower.find_by_ssn.FindBorrowerBySsnService;
 import com.api.v1.customized_annotations.SSN;
 
-@Service
-public class FindActiveBookBorrowsByBorrowerServiceImpl implements FindActiveBookBorrowsByBorrowerService {
+public class FindOverdueBookBorrowsByBorrowerServiceImpl implements FindOverdueBookBorrowsByBorrowerService {
 
     @Autowired
     private BookBorrowRepository repository;
@@ -21,9 +19,9 @@ public class FindActiveBookBorrowsByBorrowerServiceImpl implements FindActiveBoo
     private FindBorrowerBySsnService findBorrowerBySSn;
 
     @Override
-    public List<BookBorrow> findActiveBookBorrows(@SSN String ssn) {
+    public List<BookBorrow> findOverdueBookBorrows(@SSN String ssn) {
         Borrower borrower = findBorrowerBySSn.findBySsn(ssn);
-        return repository.findActiveBookBorrowsByBorrowers(borrower);
+        return repository.findOverdueBookBorrowsByBorrowers(borrower);
     }
     
 }
