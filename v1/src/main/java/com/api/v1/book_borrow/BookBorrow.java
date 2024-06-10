@@ -27,11 +27,9 @@ public class BookBorrow implements Serializable {
 
     private LocalDateTime actualReturnDateTime;
 
-    @Column(nullable = false)
     @ManyToOne(cascade = CascadeType.ALL)
     private Book book;
 
-    @Column(nullable = false)
     @ManyToOne(cascade = CascadeType.ALL)
     private Borrower borrower;
 
