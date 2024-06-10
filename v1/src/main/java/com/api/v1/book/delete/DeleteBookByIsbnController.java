@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.v1.customized_annotations.ISBN;
-
 @RestController
 @RequestMapping("api/v1/books")
 public class DeleteBookByIsbnController {
@@ -16,7 +14,7 @@ public class DeleteBookByIsbnController {
     private DeleteBookByIsbnService service;
 
     @DeleteMapping("{isbn}")
-    public ResponseEntity<Void> delete(@ISBN String isbn) {
+    public ResponseEntity<Void> delete(String isbn) {
         service.delete(isbn);
         return ResponseEntity.status(204).build();
     }

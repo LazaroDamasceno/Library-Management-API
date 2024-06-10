@@ -35,7 +35,7 @@ public class Book implements Serializable {
     private int numberOfPages = 0;
 
     @Column(nullable = false, unique = true)
-    private String isbn = "";
+    private final UUID isbn = UUID.randomUUID();
 
     @Column(nullable = false)
     private int version = 1;
@@ -56,7 +56,6 @@ public class Book implements Serializable {
         this.fields.add(dto.fieldsDTO().secondaryField());
         this.fields.add(dto.fieldsDTO().ternaryField());
         this.numberOfPages = dto.numberOfPages();
-        this.isbn = dto.isbn();
         this.version = dto.vesion();
         this.numberOfCopies = dto.numberOfCopies();
     }
@@ -96,7 +95,7 @@ public class Book implements Serializable {
         return numberOfPages;
     }
 
-    public String getIsbn() {
+    public UUID getIsbn() {
         return isbn;
     }
 

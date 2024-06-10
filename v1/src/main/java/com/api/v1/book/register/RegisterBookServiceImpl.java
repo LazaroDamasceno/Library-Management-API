@@ -1,5 +1,7 @@
 package com.api.v1.book.register;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +26,7 @@ public class RegisterBookServiceImpl implements RegisterBookService {
     }
 
     private void isBookAlreadyRegistered(String isbn) {
-        if (repository.findByIsbn(isbn).isPresent()) {
+        if (repository.findByIsbn(UUID.fromString(isbn)).isPresent()) {
             throw new DuplicatedBookException(isbn);
         }
     }
