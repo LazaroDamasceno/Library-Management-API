@@ -2,7 +2,6 @@ package com.api.v1.book_borrow.find_by_borrower.between_dates;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,8 +18,12 @@ import jakarta.validation.constraints.NotNull;
 @RequestMapping("api/v1/book-borrows")
 public class FindBookBorrowsByBorrowersBetweenDateTimesController {
 
-    @Autowired
-    private FindBookBorrowsByBorrowersBetweenDateTimesService service;
+    private final FindBookBorrowsByBorrowersBetweenDateTimesService service;
+
+    public FindBookBorrowsByBorrowersBetweenDateTimesController(
+            FindBookBorrowsByBorrowersBetweenDateTimesService service) {
+        this.service = service;
+    }
 
     @GetMapping("between-datetimes/by-ssn/{ssn}")
     public ResponseEntity<List<BookBorrow>> findBetweenDateTimes(

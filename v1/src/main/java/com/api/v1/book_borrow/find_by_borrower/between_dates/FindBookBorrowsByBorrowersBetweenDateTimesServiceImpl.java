@@ -2,8 +2,8 @@ package com.api.v1.book_borrow.find_by_borrower.between_dates;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.api.v1.book_borrow.BookBorrow;
 import com.api.v1.book_borrow.BookBorrowRepository;
@@ -16,13 +16,17 @@ import jakarta.validation.constraints.NotNull;
 @Service
 public class FindBookBorrowsByBorrowersBetweenDateTimesServiceImpl implements FindBookBorrowsByBorrowersBetweenDateTimesService {
 
-    @Autowired
-    private BookBorrowRepository repository;
+    private final BookBorrowRepository repository;
+    private final FindBorrowerBySsnService findBorrowerBySSN;
 
-    @Autowired
-    private FindBorrowerBySsnService findBorrowerBySSN;
+    public FindBookBorrowsByBorrowersBetweenDateTimesServiceImpl(BookBorrowRepository repository,
+            FindBorrowerBySsnService findBorrowerBySSN) {
+        this.repository = repository;
+        this.findBorrowerBySSN = findBorrowerBySSN;
+    }
 
     @Override
+    @Transactional(readOnly = true)
     public List<BookBorrow> findBookBorrowsBetweenDateTimes(@SSN String ssn, @NotNull BetweenDateTimesDTO dto) {
         Borrower borrower = findBorrowerBySSN.findBySsn(ssn);
         return repository.findBookBorrowsByBorrowersBetweenDateTimes(borrower, dto.firstDate(), dto.lastDate());

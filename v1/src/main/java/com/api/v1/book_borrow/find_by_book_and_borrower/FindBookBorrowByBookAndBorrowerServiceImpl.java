@@ -2,7 +2,7 @@ package com.api.v1.book_borrow.find_by_book_and_borrower;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.api.v1.book.Book;
 import com.api.v1.book.find_by_isbn.FindBookByIsbnService;
@@ -16,16 +16,19 @@ import jakarta.validation.constraints.NotBlank;
 
 public class FindBookBorrowByBookAndBorrowerServiceImpl implements FindBookBorrowByBookAndBorrowerService {
  
-    @Autowired
-    private BookBorrowRepository repository;
+    private final BookBorrowRepository repository;
+    private final FindBorrowerBySsnService findBorrowerBySSN;
+    private final FindBookByIsbnService findBookByISBN;
 
-    @Autowired
-    private FindBorrowerBySsnService findBorrowerBySSN;
-
-    @Autowired
-    private FindBookByIsbnService findBookByISBN;
+    public FindBookBorrowByBookAndBorrowerServiceImpl(BookBorrowRepository repository,
+            FindBorrowerBySsnService findBorrowerBySSN, FindBookByIsbnService findBookByISBN) {
+        this.repository = repository;
+        this.findBorrowerBySSN = findBorrowerBySSN;
+        this.findBookByISBN = findBookByISBN;
+    }
 
     @Override
+    @Transactional(readOnly = true)
     public BookBorrow findByBookAndBorrower(@NotBlank String isbn, @SSN String ssn) {
         Borrower borrower = findBorrowerBySSN.findBySsn(ssn);
         Book book = findBookByISBN.findByISBN(isbn);

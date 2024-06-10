@@ -2,7 +2,6 @@ package com.api.v1.book.register;
 
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,8 +13,11 @@ import jakarta.validation.constraints.NotNull;
 @Service
 public class RegisterBookServiceImpl implements RegisterBookService {
 
-    @Autowired    
-    private BookRepository repository;
+    private final BookRepository repository;
+
+    public RegisterBookServiceImpl(BookRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     @Transactional

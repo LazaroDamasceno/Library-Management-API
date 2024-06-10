@@ -2,8 +2,8 @@ package com.api.v1.book_borrow.find_by_borrower.all;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.api.v1.book_borrow.BookBorrow;
 import com.api.v1.book_borrow.BookBorrowRepository;
@@ -14,13 +14,17 @@ import com.api.v1.customized_annotations.SSN;
 @Service
 public class FindAllBorrowsByBorrowerServiceImpl implements FindAllBorrowsByBorrowerService {
 
-    @Autowired
-    private BookBorrowRepository repository;
+    private final BookBorrowRepository repository;
+    private final FindBorrowerBySsnService findBorrowerBySSn;
 
-    @Autowired
-    private FindBorrowerBySsnService findBorrowerBySSn;
+    public FindAllBorrowsByBorrowerServiceImpl(BookBorrowRepository repository,
+            FindBorrowerBySsnService findBorrowerBySSn) {
+        this.repository = repository;
+        this.findBorrowerBySSn = findBorrowerBySSn;
+    }
 
     @Override
+    @Transactional(readOnly = true)
     public List<BookBorrow> findAllBorrowsByBorrower(@SSN String ssn) {
         Borrower borrower = findBorrowerBySSn.findBySsn(ssn);
         return repository.findAllBookBorrowsByBorrowers(borrower);

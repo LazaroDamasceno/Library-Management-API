@@ -2,7 +2,6 @@ package com.api.v1.book.find_all;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +13,11 @@ import com.api.v1.book.Book;
 @RequestMapping("api/v1/books")
 public class FindAllBooksController {
     
-    @Autowired
-    private FindAllBooksService service;
+    private final FindAllBooksService service;
+
+    public FindAllBooksController(FindAllBooksService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public ResponseEntity<List<Book>> findAll() {

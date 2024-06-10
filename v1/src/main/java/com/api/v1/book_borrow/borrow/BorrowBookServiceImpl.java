@@ -1,7 +1,7 @@
 package com.api.v1.book_borrow.borrow;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.api.v1.book.Book;
 import com.api.v1.book.find_by_isbn.FindBookByIsbnService;
@@ -15,16 +15,19 @@ import jakarta.validation.constraints.NotNull;
 @Service
 public class BorrowBookServiceImpl implements BorrowBookService {
 
-    @Autowired
-    private BookBorrowRepository repository;
+    private final BookBorrowRepository repository;
+    private final FindBorrowerBySsnService findBorrowerBySSn; 
+    private final FindBookByIsbnService findBookByISBN;
 
-    @Autowired
-    private FindBorrowerBySsnService findBorrowerBySSn;
-
-    @Autowired 
-    FindBookByIsbnService findBookByISBN;
+    public BorrowBookServiceImpl(BookBorrowRepository repository, FindBorrowerBySsnService findBorrowerBySSn,
+            FindBookByIsbnService findBookByISBN) {
+        this.repository = repository;
+        this.findBorrowerBySSn = findBorrowerBySSn;
+        this.findBookByISBN = findBookByISBN;
+    }
 
     @Override
+    @Transactional
     public void borrowBook(@NotNull BorrowBookDTO dto) {
         Borrower borrower = findBorrowerBySSn.findBySsn(dto.ssn()); 
         doesBorrowerHaveThreeActiveBookBorrows(borrower.getSsn());

@@ -1,6 +1,5 @@
 package com.api.v1.borrower.update;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -15,9 +14,12 @@ import jakarta.validation.constraints.Size;
 @RequestMapping("api/v1/borrowers")
 public class UpdateBorrowerDataController {
 
-	@Autowired
-	private UpdateBorrowerDataService service;
+	private final UpdateBorrowerDataService service;
 	
+	public UpdateBorrowerDataController(UpdateBorrowerDataService service) {
+		this.service = service;
+	}
+
 	@PutMapping("{ssn}")
 	public ResponseEntity<Void> updateData(
 			@NotNull @PathVariable @Size(min = 9, max = 9 ) String ssn, 

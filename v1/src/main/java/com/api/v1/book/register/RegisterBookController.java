@@ -1,6 +1,5 @@
 package com.api.v1.book.register;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,8 +12,11 @@ import jakarta.validation.constraints.NotNull;
 @RequestMapping("api/v1/books")
 public class RegisterBookController {
     
-    @Autowired
-    private RegisterBookService service;
+    private final RegisterBookService service;
+
+    public RegisterBookController(RegisterBookService service) {
+        this.service = service;
+    }
 
     @PostMapping
     public ResponseEntity<Void> register(@NotNull @RequestBody RegisterBookDTO dto) {
