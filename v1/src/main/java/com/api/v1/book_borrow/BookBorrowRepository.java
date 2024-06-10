@@ -1,5 +1,6 @@
 package com.api.v1.book_borrow;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -23,4 +24,11 @@ public interface BookBorrowRepository extends JpaRepository<BookBorrow, UUID> {
         and b.borrower.ssn = :ssn 
     """)
     Optional<BookBorrow> findBookBorrowByBookAndBorrower(@Param("isbn") UUID isbn, @Param("ssn") String ssn);
+
+    @Query("""
+        select b 
+        from Borrow
+        where b.borrower.ssn = :ssn       
+    """)
+    List<BookBorrow> findAllBorrowsByBorrowers(@Param("ssn") String ssn);
 }
