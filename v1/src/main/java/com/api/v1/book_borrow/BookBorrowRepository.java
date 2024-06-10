@@ -63,10 +63,10 @@ public interface BookBorrowRepository extends JpaRepository<BookBorrow, UUID> {
         WHERE bb.borrower = :borrower
         AND (
             bb.actualReturnDateTime IS NULL
-            OR bb.dueDateTime > CURRENT_TIMESTAMP
+            OR bb.dueDateTime < CURRENT_TIMESTAMP
             OR (
                 bb.extendedDueDateTime IS NOT NULL
-                AND bb.extendedDueDateTime > CURRENT_TIMESTAMP
+                AND bb.extendedDueDateTime < CURRENT_TIMESTAMP
             )
         )
     """)
