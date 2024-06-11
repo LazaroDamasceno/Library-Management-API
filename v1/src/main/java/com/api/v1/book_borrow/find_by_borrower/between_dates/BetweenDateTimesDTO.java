@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 import jakarta.validation.constraints.NotNull;
 
 public record BetweenDateTimesDTO(
-    @NotNull LocalDateTime firstDate,
-    @NotNull LocalDateTime lastDate
+    @NotNull LocalDateTime firstDateTime,
+    @NotNull LocalDateTime lastDateTime
 ) {
     
 }

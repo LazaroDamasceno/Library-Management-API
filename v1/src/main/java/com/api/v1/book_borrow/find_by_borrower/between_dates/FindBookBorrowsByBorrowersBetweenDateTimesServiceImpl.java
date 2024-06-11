@@ -29,8 +29,14 @@ public class FindBookBorrowsByBorrowersBetweenDateTimesServiceImpl implements Fi
     @Transactional(readOnly = true)
     public List<BookBorrow> findBookBorrowsBetweenDateTimes(@SSN String ssn, @NotNull BetweenDateTimesDTO dto) {
         Borrower borrower = findBorrowerBySSN.findBySsn(ssn);
-        return repository.findBookBorrowsByBorrowersBetweenDateTimes(borrower, dto.firstDate(), dto.lastDate());
+        checkDateTimes(dto);
+        return repository.findBookBorrowsByBorrowersBetweenDateTimes(borrower, dto.firstDateTime(), dto.lastDateTime());
     }
 
+    private void checkDateTimes(BetweenDateTimesDTO dto) {
+        if (dto.firstDateTime().isAfter(dto.lastDateTime())) {
+            throw new DateTimeRangeException(dto.firstDateTime(), dto.lastDateTime());
+        }
+    }
     
 }
