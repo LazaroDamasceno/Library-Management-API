@@ -33,8 +33,8 @@ public interface BookBorrowRepository extends JpaRepository<BookBorrow, UUID> {
         SELECT bb
         FROM BookBorrow bb
         WHERE bb.borrower = :borrower
-        AND bb.borrowDateTime >= firstDateTime
-        AND bb.borrowDateTime <= lastDateTime
+        AND bb.borrowDateTime >= :firstDateTime
+        AND bb.borrowDateTime <= :lastDateTime
     """)
     List<BookBorrow> findBookBorrowsByBorrowersBetweenDateTimes(
         @Param("borrower") Borrower borrower,
