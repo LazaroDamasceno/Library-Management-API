@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.api.v1.book_borrow.BookBorrow;
 
-public interface findActiveBookBorrowsByBorrowerervice {
+public interface FindActiveBookBorrowsByBorrowerService {
 
     List<BookBorrow> findActiveBookBorrows(String ssn);
     

@@ -13,65 +13,49 @@ import com.api.v1.borrower.Borrower;
 
 public interface BookBorrowRepository extends JpaRepository<BookBorrow, UUID> {
 
-    @Query(
-        """
-            SELECT bb
-            FROM BookBorrow bb
-            WHERE bb.book = :book
-            AND bb.borrower = :borrower
-        """
-    )
+    @Query("""
+        SELECT bb
+        FROM BookBorrow bb
+        WHERE bb.book = :book
+        AND bb.borrower = :borrower
+    """)
     Optional<BookBorrow> findBookBorrowByBookAndBorrower(@Param("book") Book book, @Param("borrower") Borrower borrower);
 
-    @Query(
-        """
-            SELECT bb 
-            FROM BookBorrow bb
-            WHERE bb.borrower = :borrower
-        """)
-    List<BookBorrow> findAllBookBorrowsByBorrower(@Param("borrower") Borrower borrower);
+    @Query("""
+        SELECT bb 
+        FROM BookBorrow bb
+        WHERE bb.borrower = :borrower
+    """)
+    List<BookBorrow> findAllBookBorrowsByBorrowers(@Param("borrower") Borrower borrower);
 
     @Query("""
-            SELECT bb
-            FROM BookBorrow bb
-            WHERE bb.borrower = :borrower
-            AND (
-                bb.actualReturnDateTime IS NULL
-                OR bb.dueDateTime <= CURRENT_TIMESTAMP
-                OR (
-                    bb.extendedDueDateTime IS NOT NULL
-                    AND bb.extendedDueDateTime <= CURRENT_TIMESTAMP
-                )
+        SELECT bb
+        FROM BookBorrow bb
+        WHERE bb.borrower = :borrower
+        AND (
+            bb.actualReturnDateTime IS NULL
+            OR bb.dueDateTime <= CURRENT_TIMESTAMP
+            OR (
+                bb.extendedDueDateTime IS NOT NULL
+                AND bb.extendedDueDateTime <= CURRENT_TIMESTAMP
             )
-        """
-    )
-    List<BookBorrow> findActiveBookBorrowsByBorrower(@Param("borrower") Borrower borrower);
+        )
+    """)
+    List<BookBorrow> findActiveBookBorrowsByBorrowers(@Param("borrower") Borrower borrower);
     
-    @Query(
-        """
-            SELECT bb
-            FROM BookBorrow bb
-            WHERE bb.borrower = :borrower
-            AND (
-                bb.actualReturnDateTime IS NULL
-                OR bb.dueDateTime < CURRENT_TIMESTAMP
-                OR (
-                    bb.extendedDueDateTime IS NOT NULL
-                    AND bb.extendedDueDateTime < CURRENT_TIMESTAMP
-                )
+    @Query("""
+        SELECT bb
+        FROM BookBorrow bb
+        WHERE bb.borrower = :borrower
+        AND (
+            bb.actualReturnDateTime IS NULL
+            OR bb.dueDateTime < CURRENT_TIMESTAMP
+            OR (
+                bb.extendedDueDateTime IS NOT NULL
+                AND bb.extendedDueDateTime < CURRENT_TIMESTAMP
             )
-        """
-    )
-    List<BookBorrow> findOverdueBookBorrowsByBorrower(@Param("borrower") Borrower borrower);
-
-    @Query(
-        """
-            SELECT bb
-            FROM BookBorrow bb
-            WHERE bb.borrower = :borrower
-            AND bb.actualReturnDateTime IS NOT NULL
-        """
-    )
-    List<BookBorrow> findReturnedBookBorrowByBorrower(@Param("borrower") Borrower borrower);
+        )
+    """)
+    List<BookBorrow> findOverdueBookBorrowsByBorrowers(@Param("borrower") Borrower borrower);
 
 }

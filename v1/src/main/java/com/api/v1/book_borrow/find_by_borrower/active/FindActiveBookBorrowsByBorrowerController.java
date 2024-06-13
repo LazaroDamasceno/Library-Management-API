@@ -15,9 +15,9 @@ import com.api.v1.customized_annotations.SSN;
 @RequestMapping("api/v1/book-borrows")
 public class FindActiveBookBorrowsByBorrowerController {
     
-    private final findActiveBookBorrowsByBorrowerervice service;
+    private final FindActiveBookBorrowsByBorrowerService service;
 
-    public FindActiveBookBorrowsByBorrowerController(findActiveBookBorrowsByBorrowerervice service) {
+    public FindActiveBookBorrowsByBorrowerController(FindActiveBookBorrowsByBorrowerService service) {
         this.service = service;
     }
 
