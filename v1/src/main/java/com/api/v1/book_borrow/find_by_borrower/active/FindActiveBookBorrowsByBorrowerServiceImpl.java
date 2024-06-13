@@ -27,7 +27,7 @@ public class FindActiveBookBorrowsByBorrowerServiceImpl implements FindActiveBoo
     @Transactional(readOnly = true)
     public List<BookBorrow> findActiveBookBorrows(@SSN String ssn) {
         Borrower borrower = findBorrowerBySSn.findBySsn(ssn);
-        return repository.findActiveBookBorrowsByBorrowers(borrower);
+        return repository.findActiveBookBorrowsByBorrower(borrower);
     }
     
 }

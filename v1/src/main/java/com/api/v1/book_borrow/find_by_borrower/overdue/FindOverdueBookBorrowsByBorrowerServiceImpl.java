@@ -27,7 +27,7 @@ public class FindOverdueBookBorrowsByBorrowerServiceImpl implements FindOverdueB
     @Transactional(readOnly = true)
     public List<BookBorrow> findOverdueBookBorrows(@SSN String ssn) {
         Borrower borrower = findBorrowerBySSn.findBySsn(ssn);
-        return repository.findOverdueBookBorrowsByBorrowers(borrower);
+        return repository.findOverdueBookBorrowsByBorrower(borrower);
     }
     
 }

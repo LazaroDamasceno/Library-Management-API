@@ -26,7 +26,7 @@ public interface BookBorrowRepository extends JpaRepository<BookBorrow, UUID> {
         FROM BookBorrow bb
         WHERE bb.borrower = :borrower
     """)
-    List<BookBorrow> findAllBookBorrowsByBorrowers(@Param("borrower") Borrower borrower);
+    List<BookBorrow> findAllBookBorrowsByBorrower(@Param("borrower") Borrower borrower);
 
     @Query("""
         SELECT bb
@@ -41,7 +41,7 @@ public interface BookBorrowRepository extends JpaRepository<BookBorrow, UUID> {
             )
         )
     """)
-    List<BookBorrow> findActiveBookBorrowsByBorrowers(@Param("borrower") Borrower borrower);
+    List<BookBorrow> findActiveBookBorrowsByBorrower(@Param("borrower") Borrower borrower);
     
     @Query("""
         SELECT bb
@@ -56,6 +56,6 @@ public interface BookBorrowRepository extends JpaRepository<BookBorrow, UUID> {
             )
         )
     """)
-    List<BookBorrow> findOverdueBookBorrowsByBorrowers(@Param("borrower") Borrower borrower);
+    List<BookBorrow> findOverdueBookBorrowsByBorrower(@Param("borrower") Borrower borrower);
 
 }
