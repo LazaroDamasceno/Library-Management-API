@@ -9,7 +9,7 @@ import com.api.v1.borrower.BorrowerRepository;
 import jakarta.validation.constraints.NotNull;
 
 @Service
-public class SelfRegisterBorrowerServiceImpl implements SelfRegisterBorrowerService {
+class SelfRegisterBorrowerServiceImpl implements SelfRegisterBorrowerService {
 	
 	private final BorrowerRepository repository;
 

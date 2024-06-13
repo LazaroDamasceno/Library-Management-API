@@ -10,7 +10,7 @@ import com.api.v1.borrower.BorrowerRepository;
 import com.api.v1.customized_annotations.SSN;
 
 @Service
-public class FindBorrowerBySsnServiceImpl implements FindBorrowerBySsnService {
+class FindBorrowerBySsnServiceImpl implements FindBorrowerBySsnService {
 	
 	private final BorrowerRepository repository;
 

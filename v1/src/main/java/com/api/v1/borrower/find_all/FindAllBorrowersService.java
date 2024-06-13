@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.api.v1.borrower.Borrower;
 
-public interface FindAllBorrowersService {
+interface FindAllBorrowersService {
 
 	List<Borrower> FindAll();
 	
