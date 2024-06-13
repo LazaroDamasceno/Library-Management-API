@@ -27,7 +27,7 @@ public class FindAllBorrowsByBorrowerServiceImpl implements FindAllBorrowsByBorr
     @Transactional(readOnly = true)
     public List<BookBorrow> findAllBorrowsByBorrower(@SSN String ssn) {
         Borrower borrower = findBorrowerBySSn.findBySsn(ssn);
-        return repository.findAllBookBorrowsByBorrowers(borrower);
+        return repository.findAllBookBorrowsByBorrower(borrower);
     }
     
 }

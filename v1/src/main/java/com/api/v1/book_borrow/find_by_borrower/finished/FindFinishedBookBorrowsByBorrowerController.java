@@ -1,4 +1,4 @@
-package com.api.v1.book_borrow.find_by_borrower.active;
+package com.api.v1.book_borrow.find_by_borrower.finished;
 
 import java.util.List;
 
@@ -13,17 +13,17 @@ import com.api.v1.customized_annotations.SSN;
 
 @RestController
 @RequestMapping("api/v1/book-borrows")
-public class FindActiveBookBorrowsByBorrowerController {
-    
-    private final findActiveBookBorrowsByBorrowerervice service;
+public class FindFinishedBookBorrowsByBorrowerController {
 
-    public FindActiveBookBorrowsByBorrowerController(findActiveBookBorrowsByBorrowerervice service) {
+    private final FindFinishedBookBorrowsByBorrowerService service;
+
+    public FindFinishedBookBorrowsByBorrowerController(FindFinishedBookBorrowsByBorrowerService service) {
         this.service = service;
     }
 
-    @GetMapping("active/by-ssn/{ssn}")
-    public ResponseEntity<List<BookBorrow>> findActiveBookBorrows(@SSN @PathVariable String ssn) {
-        return ResponseEntity.ok(service.findActiveBookBorrows(ssn));
+    @GetMapping("returned/by-ssn/{ssn}")
+    public ResponseEntity<List<BookBorrow>> findReturnedBookBorrows(@SSN @PathVariable String ssn) {
+        return ResponseEntity.ok(service.findReturnedBookBorrows(ssn));
     }
-
+    
 }

@@ -15,11 +15,11 @@ import com.api.v1.customized_annotations.SSN;
 @RequestMapping("api/v1/book-borrows")
 public class FindOverdueBookBorrowsByBorrowerController {
 
-    public FindOverdueBookBorrowsByBorrowerController(FindOverdueBookBorrowsByBorrowerService service) {
+    public FindOverdueBookBorrowsByBorrowerController(findOverdueBookBorrowsByBorrowerervice service) {
         this.service = service;
     }
 
-    private final FindOverdueBookBorrowsByBorrowerService service;
+    private final findOverdueBookBorrowsByBorrowerervice service;
 
     @GetMapping("overdue/by-ssn/{ssn}")
     public ResponseEntity<List<BookBorrow>> findOverdueBookBorrows(@SSN @PathVariable String ssn) {

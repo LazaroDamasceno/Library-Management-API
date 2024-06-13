@@ -12,12 +12,12 @@ import com.api.v1.borrower.find_by_ssn.FindBorrowerBySsnService;
 import com.api.v1.customized_annotations.SSN;
 
 @Service
-public class FindOverdueBookBorrowsByBorrowerServiceImpl implements FindOverdueBookBorrowsByBorrowerService {
+public class findOverdueBookBorrowsByBorrowererviceImpl implements findOverdueBookBorrowsByBorrowerervice {
 
     private final BookBorrowRepository repository;
     private final FindBorrowerBySsnService findBorrowerBySSn;
 
-    public FindOverdueBookBorrowsByBorrowerServiceImpl(BookBorrowRepository repository,
+    public findOverdueBookBorrowsByBorrowererviceImpl(BookBorrowRepository repository,
             FindBorrowerBySsnService findBorrowerBySSn) {
         this.repository = repository;
         this.findBorrowerBySSn = findBorrowerBySSn;
@@ -27,7 +27,7 @@ public class FindOverdueBookBorrowsByBorrowerServiceImpl implements FindOverdueB
     @Transactional(readOnly = true)
     public List<BookBorrow> findOverdueBookBorrows(@SSN String ssn) {
         Borrower borrower = findBorrowerBySSn.findBySsn(ssn);
-        return repository.findOverdueBookBorrowsByBorrowers(borrower);
+        return repository.findOverdueBookBorrowsByBorrower(borrower);
     }
     
 }
