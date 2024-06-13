@@ -3,6 +3,7 @@ package com.api.v1.book_borrow.renew;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +18,7 @@ public class RenewBookBorrowController {
     }
 
     @PatchMapping("renew")
-    public ResponseEntity<Void> RenewByBorrower(@NotNull BookBorrowDataDTO dto) {
+    public ResponseEntity<Void> RenewByBorrower(@NotNull @RequestBody BookBorrowDataDTO dto) {
         service.RenewByBorrower(dto);
         return ResponseEntity.status(204).build();
     }

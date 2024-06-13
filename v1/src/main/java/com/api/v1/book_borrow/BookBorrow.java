@@ -49,7 +49,7 @@ public class BookBorrow implements Serializable {
         this.extendedDueDateTime = dueDateTime.plusWeeks(2);
     }
 
-    public void markAsReturned () {
+    public void markAsReturned() {
         this.actualReturnDateTime = LocalDateTime.now();
     }
 
