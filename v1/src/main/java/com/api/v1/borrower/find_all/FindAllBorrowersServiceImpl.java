@@ -9,7 +9,7 @@ import com.api.v1.borrower.Borrower;
 import com.api.v1.borrower.BorrowerRepository;
 
 @Service
-class FindAllBorrowersServiceImpl implements FindAllBorrowersService {
+public class FindAllBorrowersServiceImpl implements FindAllBorrowersService {
 
 	private final BorrowerRepository repository;
 	

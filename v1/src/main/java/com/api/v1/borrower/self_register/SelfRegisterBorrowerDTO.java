@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-record SelfRegisterBorrowerDTO(
+public record SelfRegisterBorrowerDTO(
 	@NotBlank String name,
 	@SSN String ssn,
 	@NotNull LocalDate birthDate,

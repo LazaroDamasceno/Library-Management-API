@@ -10,7 +10,7 @@ import jakarta.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("api/v1/borrowers")
-class SelfRegisterBorrowerController {
+public class SelfRegisterBorrowerController {
 	
 	private final SelfRegisterBorrowerService service;
 	

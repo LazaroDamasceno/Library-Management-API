@@ -11,7 +11,7 @@ import com.api.v1.borrower.Borrower;
 
 @RestController
 @RequestMapping("api/v1/borrowers")
-class FindAllBorrowersController {
+public class FindAllBorrowersController {
 	
 	private final FindAllBorrowersService service;
 	
