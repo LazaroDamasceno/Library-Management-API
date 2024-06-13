@@ -11,13 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.UUID;
 
 @Service
-public class RenewBookBorrowByBorrowerServiceImpl implements  RenewBookBorrowByBorrowerService {
+public class RenewBookBorrowServiceImpl implements RenewBookBorrowService {
 
     private final FindBookBorrowByBookAndBorrowerService findBookBorrowByBookAndBorrower;
     private final BookBorrowRepository repository;
 
-    public RenewBookBorrowByBorrowerServiceImpl(FindBookBorrowByBookAndBorrowerService findBookBorrowByBookAndBorrower,
-                                                BookBorrowRepository repository)
+    public RenewBookBorrowServiceImpl(FindBookBorrowByBookAndBorrowerService findBookBorrowByBookAndBorrower,
+                                      BookBorrowRepository repository)
     {
         this.findBookBorrowByBookAndBorrower = findBookBorrowByBookAndBorrower;
         this.repository = repository;

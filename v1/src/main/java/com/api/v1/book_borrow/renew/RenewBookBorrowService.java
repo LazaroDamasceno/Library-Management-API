@@ -1,6 +1,6 @@
 package com.api.v1.book_borrow.renew;
 
-public interface RenewBookBorrowByBorrowerService {
+public interface RenewBookBorrowService {
 
     void RenewByBorrower(BookBorrowDataDTO dto);
 

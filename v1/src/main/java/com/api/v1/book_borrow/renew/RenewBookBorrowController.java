@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/v1/book-borrows")
-public class RenewBookBorrowByBorrowerController {
+public class RenewBookBorrowController {
 
-    private final RenewBookBorrowByBorrowerService service;
+    private final RenewBookBorrowService service;
 
-    public RenewBookBorrowByBorrowerController(RenewBookBorrowByBorrowerService service) {
+    public RenewBookBorrowController(RenewBookBorrowService service) {
         this.service = service;
     }
 
