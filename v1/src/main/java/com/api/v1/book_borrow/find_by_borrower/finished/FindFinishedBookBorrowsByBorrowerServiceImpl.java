@@ -5,10 +5,12 @@ import com.api.v1.book_borrow.BookBorrowRepository;
 import com.api.v1.borrower.Borrower;
 import com.api.v1.borrower.find_by_ssn.FindBorrowerBySsnService;
 import com.api.v1.customized_annotations.SSN;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
 public class FindFinishedBookBorrowsByBorrowerServiceImpl
         implements  FindFinishedBookBorrowsByBorrowerService
 {

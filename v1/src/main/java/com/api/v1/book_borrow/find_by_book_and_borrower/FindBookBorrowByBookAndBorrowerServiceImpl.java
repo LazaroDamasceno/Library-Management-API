@@ -2,6 +2,7 @@ package com.api.v1.book_borrow.find_by_book_and_borrower;
 
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.api.v1.book.Book;
@@ -14,6 +15,7 @@ import com.api.v1.customized_annotations.SSN;
 
 import jakarta.validation.constraints.NotBlank;
 
+@Service
 public class FindBookBorrowByBookAndBorrowerServiceImpl implements FindBookBorrowByBookAndBorrowerService {
  
     private final BookBorrowRepository repository;
