@@ -58,4 +58,12 @@ public interface BookBorrowRepository extends JpaRepository<BookBorrow, UUID> {
     """)
     List<BookBorrow> findOverdueBookBorrowsByBorrower(@Param("borrower") Borrower borrower);
 
+    @Query("""
+        SELECT bb
+        FROM BookBorrow bb
+        WHERE bb.borrower = :borrower
+        AND bb.actualReturnDateTime IS NOT NULL
+    """)
+    List<BookBorrow> findFinishedBookBorrowsByBorrower(@Param("borrower") Borrower borrower);
+
 }
