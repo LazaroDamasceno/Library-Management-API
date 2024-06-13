@@ -2,6 +2,7 @@ package com.api.v1.book_borrow.borrow;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +19,7 @@ public class BorrowBookController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> borrowBook(@NotNull BorrowBookDTO dto) {
+    public ResponseEntity<Void> borrowBook(@NotNull @RequestBody BorrowBookDTO dto) {
         service.borrowBook(dto);
         return ResponseEntity.status(201).build();
     }
