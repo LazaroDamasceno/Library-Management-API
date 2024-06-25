@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import com.api.v1.book.register.RegisterBookDTO;
-
 import jakarta.persistence.*;
 
 @Entity

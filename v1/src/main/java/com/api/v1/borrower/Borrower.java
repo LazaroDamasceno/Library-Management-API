@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import com.api.v1.borrower.self_register.SelfRegisterBorrowerDTO;
 import com.api.v1.borrower.update.UpdateBorrowerDataDTO;
 
 import jakarta.persistence.*;
