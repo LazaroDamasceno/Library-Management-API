@@ -1,5 +1,6 @@
 package com.api.v1.book.register;
 
+import com.api.v1.book.BookBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +21,7 @@ public class RegisterBookServiceImpl implements RegisterBookService {
     @Override
     @Transactional
     public void register(@NotNull RegisterBookDTO dto) {
-        Book book = Book.createInstance(dto);
+        Book book = new BookBuilder().fromDto(dto).build();
         repository.save(book);
     }
     

@@ -36,13 +36,9 @@ public class BookBorrow implements Serializable {
     protected BookBorrow() {
     }
 
-    private BookBorrow(Book book, Borrower borrower) {
+    BookBorrow(Book book, Borrower borrower) {
         this.book = book;
         this.borrower = borrower;
-    }
-
-    public static BookBorrow createInstance(Book book, Borrower borrower) {
-        return new BookBorrow(book, borrower);
     }
 
     public void renewBorrow() {

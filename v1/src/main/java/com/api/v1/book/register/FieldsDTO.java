@@ -6,8 +6,8 @@ import jakarta.validation.constraints.Size;
 
 public record FieldsDTO(
     @NotBlank String mainField,
-    @NotNull @Size(min = 0) String secondaryField,
-    @NotNull @Size(min = 0)String ternaryField
+    String secondaryField,
+    String ternaryField
 ) {
     
 }

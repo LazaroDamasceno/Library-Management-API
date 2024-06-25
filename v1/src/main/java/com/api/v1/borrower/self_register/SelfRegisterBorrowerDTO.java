@@ -10,13 +10,15 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public record SelfRegisterBorrowerDTO(
-	@NotBlank String name,
+	@NotBlank String firstName,
+	String middleName,
+	@NotBlank String lastName,
 	@SSN String ssn,
 	@NotNull LocalDate birthDate,
 	@NotNull @Email String email,
 	@NotBlank String address,
 	@NotNull @Size(min = 1) String gender,
-	@NotNull @Size(min = 7, max = 7) String phoneNumber
+	@NotNull @Size(min = 10, max = 10) String phoneNumber
 ) {
 	
 }

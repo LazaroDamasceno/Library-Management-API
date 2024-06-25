@@ -1,5 +1,6 @@
 package com.api.v1.book_borrow.borrow;
 
+import com.api.v1.book_borrow.BookBorrowBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,7 +33,10 @@ public class BorrowBookServiceImpl implements BorrowBookService {
         Borrower borrower = findBorrowerBySSn.findBySsn(dto.ssn()); 
         doesBorrowerHaveThreeActiveBookBorrows(borrower.getSsn());
         Book book = findBookByISBN.findByISBN(dto.isbn());
-        BookBorrow borrow = BookBorrow.createInstance(book, borrower);
+        BookBorrow borrow = new BookBorrowBuilder()
+                .book(book)
+                .borrower(borrower)
+                .build();
         repository.save(borrow);
     }
 

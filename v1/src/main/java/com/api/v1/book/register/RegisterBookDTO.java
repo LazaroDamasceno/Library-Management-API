@@ -9,8 +9,7 @@ public record RegisterBookDTO(
     @NotBlank String title,
     @NotBlank String subtitle,
     @NotNull int numberOfPages,
-    @NotNull @Size(min = 13, max = 13) String isbn,
-    @NotNull @Min(1) int vesion,
+    @NotNull @Min(1) int version,
     @NotNull AuthorsDTO authorsDTO,
     @NotNull FieldsDTO fieldsDTO,
     @NotNull @Min(1) int numberOfCopies

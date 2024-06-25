@@ -1,5 +1,6 @@
 package com.api.v1.borrower.self_register;
 
+import com.api.v1.borrower.BorrowerBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +21,8 @@ public class SelfRegisterBorrowerServiceImpl implements SelfRegisterBorrowerServ
 	@Override
 	@Transactional
 	public void selfRegister(@NotNull SelfRegisterBorrowerDTO dto) {
-		Borrower borrower = Borrower.createInstance(dto);
 		validateData(dto.ssn());
+		Borrower borrower = new BorrowerBuilder().fromDto(dto).build();
 		repository.save(borrower);
 	}
 	

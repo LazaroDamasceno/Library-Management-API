@@ -6,8 +6,8 @@ import jakarta.validation.constraints.Size;
 
 public record AuthorsDTO(
     @NotBlank String firstAuthor,
-    @NotNull @Size(min = 0) String secondAuthor,
-    @NotNull @Size(min = 0) String thirdAuthor
+    String secondAuthor,
+    String thirdAuthor
 ) {
     
 }

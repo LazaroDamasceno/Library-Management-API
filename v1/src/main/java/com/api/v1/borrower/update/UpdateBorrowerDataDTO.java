@@ -8,7 +8,9 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public record UpdateBorrowerDataDTO(
-		@NotBlank String name,
+		@NotBlank String firstName,
+		String middleName,
+		@NotBlank String lastName,
 		@NotNull LocalDate birthDate,
 		@Email String email,
 		@NotBlank String address,

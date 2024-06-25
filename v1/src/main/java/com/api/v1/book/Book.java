@@ -18,10 +18,10 @@ public class Book implements Serializable {
     private UUID id;
 
     @Column(nullable = false)
-    private String title = "";
+    private String title;
 
     @Column(nullable = false)
-    private String subtitle = "";
+    private String subtitle;
 
     @Column(nullable = false)
     private List<String> authors = new ArrayList<>();
@@ -30,43 +30,34 @@ public class Book implements Serializable {
     private List<String> fields = new ArrayList<>();
 
     @Column(nullable = false)
-    private int numberOfPages = 0;
+    private int numberOfPages;
 
     @Column(nullable = false, unique = true)
     private final UUID isbn = UUID.randomUUID();
 
     @Column(nullable = false)
-    private int version = 1;
+    private int version;
 
     @Column(nullable = false)
-    private int numberOfCopies = 1;
-
-    @Column(nullable = false)
-    private int numberOfBorrowedCopies = 0;
-
-    private Book(RegisterBookDTO dto) {
-        this.title = dto.title();
-        this.subtitle = dto.subtitle();
-        this.authors.add(dto.authorsDTO().firstAuthor());
-        this.authors.add(dto.authorsDTO().secondAuthor());
-        this.authors.add(dto.authorsDTO().thirdAuthor());
-        this.fields.add(dto.fieldsDTO().mainField());
-        this.fields.add(dto.fieldsDTO().secondaryField());
-        this.fields.add(dto.fieldsDTO().ternaryField());
-        this.numberOfPages = dto.numberOfPages();
-        this.version = dto.vesion();
-        this.numberOfCopies = dto.numberOfCopies();
-    }
-
-    public static Book createInstance(RegisterBookDTO dto) {
-        return new Book(dto);
-    }
+    private int numberOfCopies;
 
     protected Book() {
     }
 
-    public UUID getId() {
-        return id;
+    public Book(String title, String subtitle,
+                List<String> authors,
+                List<String> fields,
+                int numberOfPages,
+                int version,
+                int numberOfCopies
+    ) {
+        this.title = title;
+        this.subtitle = subtitle;
+        this.authors = authors;
+        this.fields = fields;
+        this.numberOfPages = numberOfPages;
+        this.version = version;
+        this.numberOfCopies = numberOfCopies;
     }
 
     public String getTitle() {
@@ -101,8 +92,4 @@ public class Book implements Serializable {
         return numberOfCopies;
     }
 
-    public int getNumberOfBorrowedCopies() {
-        return numberOfBorrowedCopies;
-    }
-    
 }
