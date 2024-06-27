@@ -1,8 +1,6 @@
 package com.api.v1.book;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.*;
@@ -22,10 +20,10 @@ public class Book implements Serializable {
     private String subtitle;
 
     @Column(nullable = false)
-    private List<String> authors = new ArrayList<>();
+    private String author;
 
     @Column(nullable = false)
-    private List<String> fields = new ArrayList<>();
+    private String field;
 
     @Column(nullable = false)
     private int numberOfPages;
@@ -43,16 +41,16 @@ public class Book implements Serializable {
     }
 
     public Book(String title, String subtitle,
-                List<String> authors,
-                List<String> fields,
+                String author,
+                String field,
                 int numberOfPages,
                 int version,
                 int numberOfCopies
     ) {
         this.title = title;
         this.subtitle = subtitle;
-        this.authors = authors;
-        this.fields = fields;
+        this.author = author;
+        this.field = field;
         this.numberOfPages = numberOfPages;
         this.version = version;
         this.numberOfCopies = numberOfCopies;
@@ -64,14 +62,6 @@ public class Book implements Serializable {
 
     public String getSubtitle() {
         return subtitle;
-    }
-
-    public List<String> getAuthors() {
-        return authors;
-    }
-
-    public List<String> getFields() {
-        return fields;
     }
 
     public int getNumberOfPages() {
@@ -88,6 +78,18 @@ public class Book implements Serializable {
 
     public int getNumberOfCopies() {
         return numberOfCopies;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getField() {
+        return field;
     }
 
 }

@@ -33,10 +33,7 @@ public class BorrowBookServiceImpl implements BorrowBookService {
         Borrower borrower = findBorrowerBySSn.findBySsn(dto.ssn()); 
         doesBorrowerHaveThreeActiveBookBorrows(borrower.getSsn());
         Book book = findBookByISBN.findByISBN(dto.isbn());
-        BookBorrow borrow = new BookBorrowBuilder()
-                .book(book)
-                .borrower(borrower)
-                .build();
+        BookBorrow borrow = new BookBorrowBuilder(book, borrower).build();
         repository.save(borrow);
     }
 
@@ -47,10 +44,11 @@ public class BorrowBookServiceImpl implements BorrowBookService {
     }
 
     private long countHowManyBorrowsByBorrower(String ssn) {
+        Borrower borrower = findBorrowerBySSn.findBySsn(ssn); 
         return repository
             .findAll()
             .stream()
-            .filter(e -> e.getBorrower().getSsn() == ssn)
+            .filter(e -> e.getBorrower().equals(borrower))
             .count();
     }
 

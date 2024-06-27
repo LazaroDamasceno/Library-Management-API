@@ -9,8 +9,8 @@ public record RegisterBookDTO(
     @NotBlank String subtitle,
     @NotNull int numberOfPages,
     @NotNull @Min(1) int version,
-    @NotNull AuthorsDTO authorsDTO,
-    @NotNull FieldsDTO fieldsDTO,
+    @NotBlank String author,
+    @NotBlank String field,
     @NotNull @Min(1) int numberOfCopies
 ) {
     

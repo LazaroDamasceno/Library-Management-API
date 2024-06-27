@@ -46,6 +46,26 @@ public class Borrower implements Serializable {
 	}
 
 	Borrower(
+		String firstName,
+		String lastName,
+		String ssn,
+		LocalDate birthDate,
+		String email,
+		String address,
+		String gender,
+		String phoneNumber
+	) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.ssn = ssn;
+		this.birthDate = birthDate;
+		this.email = email;
+		this.address = address;
+		this.gender = gender;
+		this.phoneNumber = phoneNumber;
+	}
+
+	Borrower(
 			String firstName,
 			String middleName,
 			String lastName,
@@ -113,5 +133,9 @@ public class Borrower implements Serializable {
 	public String getFirstName() {
 		return firstName;
 	}
+
+    public UUID getId() {
+        return id;
+    }
 
 }

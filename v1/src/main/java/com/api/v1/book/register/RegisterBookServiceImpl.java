@@ -21,7 +21,7 @@ public class RegisterBookServiceImpl implements RegisterBookService {
     @Override
     @Transactional
     public void register(@NotNull RegisterBookDTO dto) {
-        Book book = new BookBuilder().fromDto(dto).build();
+        Book book = new BookBuilder(dto).build();
         repository.save(book);
     }
     

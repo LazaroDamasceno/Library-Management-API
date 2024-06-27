@@ -2,40 +2,32 @@ package com.api.v1.book;
 
 import com.api.v1.book.register.RegisterBookDTO;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class BookBuilder {
 
-    private String title;
-    private String subtitle;
-    private List<String> authors = new ArrayList<>();
-    private List<String> fields = new ArrayList<>();
-    private int numberOfPages;
-    private int version;
-    private int numberOfCopies;
+    private final String title;
+    private final String subtitle;
+    private final String author;
+    private final String field;
+    private final int numberOfPages;
+    private final int version;
+    private final int numberOfCopies;
 
-    public BookBuilder fromDto(RegisterBookDTO dto) {
+    public BookBuilder(RegisterBookDTO dto) {
         this.title = dto.title();
         this.subtitle = dto.subtitle();
-        this.authors.add(dto.authorsDTO().firstAuthor());
-        this.authors.add(dto.authorsDTO().secondAuthor());
-        this.authors.add(dto.authorsDTO().thirdAuthor());
-        this.fields.add(dto.fieldsDTO().mainField());
-        this.fields.add(dto.fieldsDTO().secondaryField());
-        this.fields.add(dto.fieldsDTO().ternaryField());
         this.numberOfPages = dto.numberOfPages();
         this.version = dto.version();
         this.numberOfCopies = dto.numberOfCopies();
-        return this;
+        this.author = dto.author();
+        this.field = dto.field();
     }
 
     public Book build() {
         return new Book(
                 title,
                 subtitle,
-                authors,
-                fields,
+                author,
+                field,
                 numberOfPages,
                 version,
                 numberOfCopies
