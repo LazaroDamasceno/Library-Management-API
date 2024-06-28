@@ -70,17 +70,6 @@ public class BorrowerBuilder {
     );}
 
     public Borrower build() {
-        if (middleName == null) {
-            return new Borrower(
-                firstName,
-                lastName,
-                ssn,
-                birthDate,
-                email,
-                address,
-                gender,
-                phoneNumber
-        );}
         return new Borrower(
             firstName,
             middleName,

@@ -6,7 +6,12 @@ import java.util.UUID;
 
 import com.api.v1.borrower.update.UpdateBorrowerDataDTO;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "v1_borrower")
@@ -43,26 +48,6 @@ public class Borrower implements Serializable {
     private String phoneNumber;
 
 	protected Borrower() {
-	}
-
-	Borrower(
-		String firstName,
-		String lastName,
-		String ssn,
-		LocalDate birthDate,
-		String email,
-		String address,
-		String gender,
-		String phoneNumber
-	) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.ssn = ssn;
-		this.birthDate = birthDate;
-		this.email = email;
-		this.address = address;
-		this.gender = gender;
-		this.phoneNumber = phoneNumber;
 	}
 
 	Borrower(
