@@ -20,8 +20,6 @@ public class SelfRegisterBorrowerServiceImpl implements SelfRegisterBorrowerServ
         this.repository = repository;
     }
 
-
-
 	@Override
 	@Transactional
 	public void selfRegister(@NotNull SelfRegisterBorrowerDTO dto) {
