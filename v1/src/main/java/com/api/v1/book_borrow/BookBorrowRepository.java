@@ -66,4 +66,13 @@ public interface BookBorrowRepository extends JpaRepository<BookBorrow, UUID> {
     """)
     List<BookBorrow> findFinishedBookBorrowsByBorrower(@Param("borrower") Borrower borrower);
 
+    @Query(
+        """
+            SELECT COUNT(bb) 
+            FROM BookBorrow bb    
+            WHERE bb.borrower = :borrower    
+        """
+    )
+    int countHowManyBorrowsByBorrower(@Param("borrower") Borrower borrower);
+
 }

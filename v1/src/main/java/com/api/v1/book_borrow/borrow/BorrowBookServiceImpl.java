@@ -38,21 +38,17 @@ public class BorrowBookServiceImpl implements BorrowBookService {
         repository.save(borrow);
     }
 
+    private int countHowManyBorrowsByBorrower(String ssn) {
+        Borrower borrower = findBorrowerBySSn.findBySsn(ssn); 
+        return repository.countHowManyBorrowsByBorrower(borrower);
+    }
+
     private final int BOOK_BORROWS_LIMIT = 3;
 
     private void doesBorrowerHaveThreeActiveBookBorrows(String ssn) {
         if (countHowManyBorrowsByBorrower(ssn) == BOOK_BORROWS_LIMIT) {
             throw new BookBorrowLimitReachedException(ssn);
         }
-    }
-
-    private long countHowManyBorrowsByBorrower(String ssn) {
-        Borrower borrower = findBorrowerBySSn.findBySsn(ssn); 
-        return repository
-            .findAll()
-            .stream()
-            .filter(e -> e.getBorrower().equals(borrower))
-            .count();
     }
 
 }
