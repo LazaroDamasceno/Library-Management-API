@@ -1,16 +1,17 @@
 package com.api.v1.borrower;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.api.v1.borrower.self_register.SelfRegisterBorrowerDTO;
 
 @Service
-public class BorrowerBuilderImpl implements  BorrowerBuilder {
+public class BorrowerBuilderImpl implements BorrowerBuilder {
 
     private final String firstName;
-    private String middleName;
+    private Optional<String> middleName;
     private final String lastName;
     private final String ssn;
     private final LocalDate birthDate;
@@ -21,7 +22,7 @@ public class BorrowerBuilderImpl implements  BorrowerBuilder {
 
     private BorrowerBuilderImpl(
         String firstName, 
-        String middleName, 
+        Optional<String> middleName,
         String lastName, 
         String ssn, 
         LocalDate birthDate,
@@ -78,7 +79,7 @@ public class BorrowerBuilderImpl implements  BorrowerBuilder {
     public BorrowerBuilderImpl withMiddleName(String middleName) {
         return new BorrowerBuilderImpl(
             firstName,
-            middleName,
+            Optional.of(middleName),
             lastName,
             ssn,
             birthDate,
@@ -92,7 +93,7 @@ public class BorrowerBuilderImpl implements  BorrowerBuilder {
     public Borrower build() {
         return new Borrower(
             firstName,
-            middleName,
+            middleName.orElse(null),
             lastName,
             ssn,
             birthDate,
