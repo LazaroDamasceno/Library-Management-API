@@ -15,19 +15,35 @@ public class BookBuilderImpl implements BookBuilder {
     private final int version;
     private final int numberOfCopies;
 
-    private BookBuilderImpl(RegisterBookDTO dto) {
-        this.title = dto.title();
-        this.subtitle = dto.subtitle();
-        this.numberOfPages = dto.numberOfPages();
-        this.version = dto.version();
-        this.numberOfCopies = dto.numberOfCopies();
-        this.author = dto.author();
-        this.field = dto.field();
+    private BookBuilderImpl(
+            String title,
+            String subtitle,
+            String author,
+            String field,
+            int numberOfPages,
+            int version,
+            int numberOfCopies
+    ) {
+        this.title = title;
+        this.subtitle = subtitle;
+        this.author = author;
+        this.field = field;
+        this.numberOfPages = numberOfPages;
+        this.version = version;
+        this.numberOfCopies = numberOfCopies;
     }
 
     @Override
     public BookBuilderImpl create(RegisterBookDTO dto) {
-        return new BookBuilderImpl(dto);
+        return new BookBuilderImpl(
+                dto.title(),
+                dto.subtitle(),
+                dto.author(),
+                dto.field(),
+                dto.numberOfPages(),
+                dto.version(),
+                dto.numberOfCopies()
+        );
     }
 
     @Override
