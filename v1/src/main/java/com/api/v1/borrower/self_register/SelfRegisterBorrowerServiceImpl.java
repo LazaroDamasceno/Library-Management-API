@@ -26,23 +26,13 @@ public class SelfRegisterBorrowerServiceImpl implements SelfRegisterBorrowerServ
 	@Transactional
 	public void selfRegister(@NotNull SelfRegisterBorrowerDTO dto) {
 		validateData(dto.ssn());
-		setBorrowerIfMiddleNameIsNull(dto);
-		setBorrowerIfMiddleNameIsNotNull(dto);
+		Borrower borrower = createBorrower(dto);
+		repository.save(borrower);
 	}
 
-	private void setBorrowerIfMiddleNameIsNull(SelfRegisterBorrowerDTO dto) {
-		if (dto.middleName() == null) {
-			var borrower = builder.create(dto).build();
-			repository.save(borrower);
-		}
-
-	}
-
-	private void setBorrowerIfMiddleNameIsNotNull(SelfRegisterBorrowerDTO dto) {
-		if (dto.middleName() != null) {
-			Borrower borrower = builder.create(dto).withMiddleName(dto.middleName()).build();
-			repository.save(borrower);
-		}
+	private Borrower createBorrower(SelfRegisterBorrowerDTO dto) {
+		if (dto.middleName() == null) return builder.create(dto).build();
+		return builder.create(dto).withMiddleName(dto.middleName()).build();
 	}
 	
 	private void validateData(String ssn) {
