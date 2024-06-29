@@ -3,22 +3,19 @@ package com.api.v1.borrower;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import org.springframework.stereotype.Service;
-
 import com.api.v1.borrower.self_register.SelfRegisterBorrowerDTO;
 
-@Service
 public class BorrowerBuilderImpl implements BorrowerBuilder {
 
-    private final String firstName;
+    private String firstName;
     private Optional<String> middleName;
-    private final String lastName;
-    private final String ssn;
-    private final LocalDate birthDate;
-    private final String email;
-    private final String address;
-    private final String gender;
-    private final String phoneNumber;
+    private String lastName;
+    private String ssn;
+    private LocalDate birthDate;
+    private String email;
+    private String address;
+    private String gender;
+    private String phoneNumber;
 
     private BorrowerBuilderImpl(
         String firstName, 
@@ -60,6 +57,10 @@ public class BorrowerBuilderImpl implements BorrowerBuilder {
         this.address = address;
         this.gender = gender;
         this.phoneNumber = phoneNumber;
+    }
+
+    public BorrowerBuilderImpl() {
+
     }
 
     @Override
