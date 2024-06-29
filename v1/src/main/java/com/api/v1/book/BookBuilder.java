@@ -4,7 +4,7 @@ import com.api.v1.book.register.RegisterBookDTO;
 
 public interface BookBuilder {
     
-    BookBuilderImpl create(RegisterBookDTO dto);
+    BookBuilderImpl createFromDTO(RegisterBookDTO dto);
     Book build();
 
 }

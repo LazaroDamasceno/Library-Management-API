@@ -3,8 +3,11 @@ package com.api.v1.borrower;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.api.v1.borrower.self_register.SelfRegisterBorrowerDTO;
 
+@Service
 public class BorrowerBuilderImpl implements BorrowerBuilder {
 
     private String firstName;
@@ -17,78 +20,24 @@ public class BorrowerBuilderImpl implements BorrowerBuilder {
     private String gender;
     private String phoneNumber;
 
-    private BorrowerBuilderImpl(
-        String firstName, 
-        Optional<String> middleName,
-        String lastName, 
-        String ssn, 
-        LocalDate birthDate,
-        String email, 
-        String address, 
-        String gender, 
-        String phoneNumber
-    ) {
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.ssn = ssn;
-        this.birthDate = birthDate;
-        this.email = email;
-        this.address = address;
-        this.gender = gender;
-        this.phoneNumber = phoneNumber;
-    }
-
-    private BorrowerBuilderImpl(
-        String firstName, 
-        String lastName, 
-        String ssn, 
-        LocalDate birthDate,
-        String email, 
-        String address, 
-        String gender, 
-        String phoneNumber
-    ) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.ssn = ssn;
-        this.birthDate = birthDate;
-        this.email = email;
-        this.address = address;
-        this.gender = gender;
-        this.phoneNumber = phoneNumber;
-    }
-
-    public BorrowerBuilderImpl() {
-
-    }
-
     @Override
-    public BorrowerBuilderImpl create(SelfRegisterBorrowerDTO dto) {
-        return new BorrowerBuilderImpl(
-            firstName,
-            lastName,
-            ssn,
-            birthDate,
-            email,
-            address,
-            gender,
-            phoneNumber
-    );}
+    public BorrowerBuilderImpl createFromDTO(SelfRegisterBorrowerDTO dto) {
+        this.firstName = dto.firstName();
+        this.lastName = dto.lastName();
+        this.ssn = dto.ssn();
+        this.birthDate = dto.birthDate();
+        this.email = dto.email();
+        this.address = dto.address();
+        this.gender = dto.gender();
+        this.phoneNumber = dto.phoneNumber();
+        return this;
+    }
 
     @Override
     public BorrowerBuilderImpl withMiddleName(String middleName) {
-        return new BorrowerBuilderImpl(
-            firstName,
-            Optional.of(middleName),
-            lastName,
-            ssn,
-            birthDate,
-            email,
-            address,
-            gender,
-            phoneNumber
-    );}
+        this.middleName = Optional.of(middleName);
+        return this;
+    }
 
     @Override
     public Borrower build() {
@@ -102,6 +51,7 @@ public class BorrowerBuilderImpl implements BorrowerBuilder {
             address,
             gender,
             phoneNumber
-    );}
+        );
+    }
 
 }

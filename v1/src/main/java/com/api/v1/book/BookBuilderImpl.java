@@ -1,7 +1,10 @@
 package com.api.v1.book;
 
+import org.springframework.stereotype.Service;
+
 import com.api.v1.book.register.RegisterBookDTO;
 
+@Service
 public class BookBuilderImpl implements BookBuilder {
 
     private String title;
@@ -12,39 +15,16 @@ public class BookBuilderImpl implements BookBuilder {
     private int version;
     private int numberOfCopies;
 
-    private BookBuilderImpl(
-            String title,
-            String subtitle,
-            String author,
-            String field,
-            int numberOfPages,
-            int version,
-            int numberOfCopies
-    ) {
-        this.title = title;
-        this.subtitle = subtitle;
-        this.author = author;
-        this.field = field;
-        this.numberOfPages = numberOfPages;
-        this.version = version;
-        this.numberOfCopies = numberOfCopies;
-    }
-
-    public BookBuilderImpl() {
-
-    }
-
     @Override
-    public BookBuilderImpl create(RegisterBookDTO dto) {
-        return new BookBuilderImpl(
-                dto.title(),
-                dto.subtitle(),
-                dto.author(),
-                dto.field(),
-                dto.numberOfPages(),
-                dto.version(),
-                dto.numberOfCopies()
-        );
+    public BookBuilderImpl createFromDTO(RegisterBookDTO dto) {
+        this.title = dto.title();
+        this.subtitle = dto.subtitle();
+        this.author = dto.author();
+        this.field = dto.field();
+        this.numberOfPages = dto.numberOfPages();
+        this.version = dto.version();
+        this.numberOfCopies = dto.numberOfCopies();
+        return this;
     }
 
     @Override

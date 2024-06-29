@@ -1,6 +1,5 @@
 package com.api.v1.borrower.self_register;
 
-import com.api.v1.borrower.BorrowerBuilderImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,8 +13,10 @@ import jakarta.validation.constraints.NotNull;
 public class SelfRegisterBorrowerServiceImpl implements SelfRegisterBorrowerService {
 	
 	private final BorrowerRepository repository;
+	private final BorrowerBuilder builder;
 
-    public SelfRegisterBorrowerServiceImpl(BorrowerRepository repository) {
+    public SelfRegisterBorrowerServiceImpl(BorrowerBuilder builder, BorrowerRepository repository) {
+        this.builder = builder;
         this.repository = repository;
     }
 
@@ -28,8 +29,8 @@ public class SelfRegisterBorrowerServiceImpl implements SelfRegisterBorrowerServ
 	}
 
 	private Borrower createBorrower(SelfRegisterBorrowerDTO dto) {
-		if (dto.middleName() == null) new BorrowerBuilderImpl().create(dto).build();
-		return new BorrowerBuilderImpl().create(dto).withMiddleName(dto.middleName()).build();
+		if (dto.middleName() == null) builder.createFromDTO(dto).build();
+		return builder.createFromDTO(dto).withMiddleName(dto.middleName()).build();
 	}
 	
 	private void validateData(String ssn) {
