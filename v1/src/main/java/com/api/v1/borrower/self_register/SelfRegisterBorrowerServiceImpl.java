@@ -13,48 +13,34 @@ import jakarta.validation.constraints.NotNull;
 public class SelfRegisterBorrowerServiceImpl implements SelfRegisterBorrowerService {
 	
 	private final BorrowerRepository repository;
+	private final BorrowerBuilder builder;
 
-	public SelfRegisterBorrowerServiceImpl(BorrowerRepository repository) {
-		this.repository = repository;
-	}
+    public SelfRegisterBorrowerServiceImpl(BorrowerBuilder builder, BorrowerRepository repository) {
+        this.builder = builder;
+        this.repository = repository;
+    }
+
+
 
 	@Override
 	@Transactional
 	public void selfRegister(@NotNull SelfRegisterBorrowerDTO dto) {
 		validateData(dto.ssn());
-		setBorrowerWhenMiddleNameIsNull(dto);
-		setBorrowerWhenMiddleNameIsNotNull(dto);
+		setBorrowerIfMiddleNameIsNull(dto);
+		setBorrowerIfMiddleNameIsNotNull(dto);
 	}
 
-	private void setBorrowerWhenMiddleNameIsNull(SelfRegisterBorrowerDTO dto) {
+	private void setBorrowerIfMiddleNameIsNull(SelfRegisterBorrowerDTO dto) {
 		if (dto.middleName() == null) {
-			Borrower borrower = new BorrowerBuilder(
-				dto.firstName(),
-				dto.lastName(),
-				dto.ssn(),
-				dto.birthDate(),
-				dto.email(),
-				dto.address(), 
-				dto.gender(),
-				dto.phoneNumber()
-			).build();
+			var borrower = builder.create(dto).build();
 			repository.save(borrower);
 		}
 
 	}
 
-	private void setBorrowerWhenMiddleNameIsNotNull(SelfRegisterBorrowerDTO dto) {
+	private void setBorrowerIfMiddleNameIsNotNull(SelfRegisterBorrowerDTO dto) {
 		if (dto.middleName() != null) {
-			Borrower borrower = new BorrowerBuilder(
-				dto.firstName(),
-				dto.lastName(),
-				dto.ssn(),
-				dto.birthDate(),
-				dto.email(),
-				dto.address(), 
-				dto.gender(),
-				dto.phoneNumber()
-			).middleName(dto.middleName()).build();
+			Borrower borrower = builder.create(dto).withMiddleName(dto.middleName()).build();
 			repository.save(borrower);
 		}
 	}
