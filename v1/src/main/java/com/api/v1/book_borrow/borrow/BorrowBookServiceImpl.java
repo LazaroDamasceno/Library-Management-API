@@ -38,7 +38,7 @@ public class BorrowBookServiceImpl implements BorrowBookService {
         repository.save(borrow);
     }
 
-    private final static int BOOK_BORROWS_LIMIT = 3;
+    private final int BOOK_BORROWS_LIMIT = 3;
 
     private void doesBorrowerHaveThreeActiveBookBorrows(String ssn) {
         if (countHowManyBorrowsByBorrower(ssn) == BOOK_BORROWS_LIMIT) {
