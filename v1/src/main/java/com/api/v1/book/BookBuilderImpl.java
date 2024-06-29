@@ -43,6 +43,4 @@ public class BookBuilderImpl implements BookBuilder {
         );
     }
 
-
-
 }
