@@ -1,9 +1,10 @@
 package com.api.v1.book.find_all;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.api.v1.book.Book;
 import com.api.v1.book.BookRepository;
@@ -18,9 +19,9 @@ public class FindAllBooksServiceImpl implements FindAllBooksService {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<Book> findAll() {
-        return repository.findAll();
+    @Async
+    public CompletableFuture<List<Book>> findAll() {
+        return CompletableFuture.completedFuture(repository.findAll());
     }
     
 }

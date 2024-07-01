@@ -1,8 +1,9 @@
 package com.api.v1.book.find_all;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
-import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,8 +21,9 @@ public class FindAllBooksController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Book>> findAll() {
-        return ResponseEntity.ok(service.findAll());
+    @Async
+    public CompletableFuture<List<Book>> findAll() {
+        return service.findAll();
     }
 
 }

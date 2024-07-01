@@ -1,8 +1,9 @@
 package com.api.v1.book_borrow.find_by_borrower.all;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
-import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +23,9 @@ public class FindAllBorrowsByBorrowerController {
     }
 
     @GetMapping("by-ssn/{ssn}")
-    public ResponseEntity<List<BookBorrow>> findAllBorrowsByBorrower(@SSN @PathVariable String ssn) {
-        return ResponseEntity.ok(service.findAllBorrowsByBorrower(ssn));
+    @Async
+    public CompletableFuture<List<BookBorrow>> findAllBorrowsByBorrower(@SSN @PathVariable String ssn) {
+        return service.findAllBorrowsByBorrower(ssn);
     }
 
 }

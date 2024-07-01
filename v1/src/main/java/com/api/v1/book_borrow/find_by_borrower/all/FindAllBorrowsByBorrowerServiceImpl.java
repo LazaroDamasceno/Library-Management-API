@@ -1,9 +1,10 @@
 package com.api.v1.book_borrow.find_by_borrower.all;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.api.v1.book_borrow.BookBorrow;
 import com.api.v1.book_borrow.BookBorrowRepository;
@@ -24,10 +25,11 @@ public class FindAllBorrowsByBorrowerServiceImpl implements FindAllBorrowsByBorr
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<BookBorrow> findAllBorrowsByBorrower(@SSN String ssn) {
+    @Async
+    public CompletableFuture<List<BookBorrow>> findAllBorrowsByBorrower(@SSN String ssn) {
         Borrower borrower = findBorrowerBySSn.findBySsn(ssn);
-        return repository.findAllBookBorrowsByBorrower(borrower);
+        List<BookBorrow> borrows = repository.findActiveBookBorrowsByBorrower(borrower);
+        return CompletableFuture.completedFuture(borrows);
     }
     
 }

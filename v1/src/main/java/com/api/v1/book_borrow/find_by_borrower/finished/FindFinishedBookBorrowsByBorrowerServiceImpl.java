@@ -5,10 +5,12 @@ import com.api.v1.book_borrow.BookBorrowRepository;
 import com.api.v1.borrower.Borrower;
 import com.api.v1.borrower.find_by_ssn.FindBorrowerBySsnService;
 import com.api.v1.customized_annotations.SSN;
+
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class FindFinishedBookBorrowsByBorrowerServiceImpl
@@ -26,10 +28,11 @@ public class FindFinishedBookBorrowsByBorrowerServiceImpl
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<BookBorrow> findFinishedByBorrower(@SSN String ssn) {
+    @Async
+    public CompletableFuture<List<BookBorrow>> findFinishedByBorrower(@SSN String ssn) {
         Borrower borrower = findBorrowerBySsn.findBySsn(ssn);
-        return repository.findFinishedBookBorrowsByBorrower(borrower);
+                List<BookBorrow> borrows = repository.findActiveBookBorrowsByBorrower(borrower);
+        return CompletableFuture.completedFuture(borrows);
     }
 
 }

@@ -1,8 +1,9 @@
 package com.api.v1.borrower.find_all;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
-import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,8 +21,9 @@ public class FindAllBorrowersController {
     }
 
     @GetMapping
-	public ResponseEntity<List<Borrower>> FindAll() {
-		return ResponseEntity.ok(service.FindAll());
+	@Async
+	public CompletableFuture<List<Borrower>> FindAll() {
+		return service.FindAll();
 	}
 
 }
